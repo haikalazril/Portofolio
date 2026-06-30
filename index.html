@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <title>Haikal Azril Hikmatyar — Data Professional</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -641,14 +644,28 @@
     <h3>✏️ Edit Portofolio</h3>
     <button class="close-btn" onclick="toggleEditPanel()">×</button>
   </div>
-  <div class="edit-tabs" id="editTabs">
-    <button class="edit-tab active" onclick="switchTab('profil')">Profil</button>
-    <button class="edit-tab" onclick="switchTab('skills')">Skills</button>
-    <button class="edit-tab" onclick="switchTab('projects')">Projects</button>
-    <button class="edit-tab" onclick="switchTab('experience')">Pengalaman</button>
-    <button class="edit-tab" onclick="switchTab('certs')">Sertifikat</button>
+
+  <!-- LOGIN GATE -->
+  <div id="editLoginGate" style="padding:1.5rem;">
+    <p style="margin-bottom:1rem;font-size:14px;color:#666;">Login dulu untuk mengedit. Perubahan akan tersimpan online dan langsung terlihat semua orang yang membuka situs ini.</p>
+    <div class="edit-field"><label>Email</label><input id="login-email" type="email" placeholder="email kamu"></div>
+    <div class="edit-field"><label>Password</label><input id="login-password" type="password" placeholder="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn-save" onclick="doLogin()">🔐 Login</button>
+    <div id="loginError" style="color:#c0392b;margin-top:8px;font-size:13px;"></div>
   </div>
-  <div class="edit-body">
+
+  <div id="editAuthedArea" style="display:none;">
+    <div style="padding:0 1.5rem;display:flex;justify-content:flex-end;">
+      <button class="close-btn" style="font-size:13px;width:auto;padding:4px 10px;" onclick="doLogout()">🔓 Logout</button>
+    </div>
+    <div class="edit-tabs" id="editTabs">
+      <button class="edit-tab active" onclick="switchTab('profil')">Profil</button>
+      <button class="edit-tab" onclick="switchTab('skills')">Skills</button>
+      <button class="edit-tab" onclick="switchTab('projects')">Projects</button>
+      <button class="edit-tab" onclick="switchTab('experience')">Pengalaman</button>
+      <button class="edit-tab" onclick="switchTab('certs')">Sertifikat</button>
+    </div>
+    <div class="edit-body">
 
     <!-- TAB: PROFIL -->
     <div class="edit-section active" id="tab-profil">
@@ -715,6 +732,7 @@
     <button class="btn-save" onclick="saveAll()">💾 Simpan Perubahan</button>
     <button class="btn-save" style="background:var(--surface-alt);color:var(--ink);margin-top:8px;" onclick="exportDataJSON()">📋 Export Data (untuk publish)</button>
     <button class="btn-reset" onclick="resetAll()" title="Hapus semua data tersimpan">Reset</button>
+  </div>
   </div>
 </div>
 
@@ -891,25 +909,59 @@ const DEFAULT = {
 };
 
 // ========================
+// FIREBASE INIT
+// ========================
+const firebaseConfig = {
+  apiKey: "AIzaSyCYJB0Sy-3jAdxYs-aHiVp05D0WU6wbIvQ",
+  authDomain: "portofolio-haikal.firebaseapp.com",
+  databaseURL: "https://portofolio-haikal-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "portofolio-haikal",
+  storageBucket: "portofolio-haikal.firebasestorage.app",
+  messagingSenderId: "876133054900",
+  appId: "1:876133054900:web:72d420950a8fbb54679ae1"
+};
+firebase.initializeApp(firebaseConfig);
+const fbAuth = firebase.auth();
+const fbDB = firebase.database();
+fbAuth.onAuthStateChanged(() => { if (typeof editModeActive !== 'undefined' && editModeActive) refreshAuthUI(); });
+
+// ========================
 // LOAD / SAVE
 // ========================
-function loadData() {
+function loadLocalFallback() {
   try {
     const raw = localStorage.getItem('portfolio_data');
     return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT));
   } catch(e) { return JSON.parse(JSON.stringify(DEFAULT)); }
 }
 
-function saveData(data) {
+async function saveData(data) {
   try {
-    localStorage.setItem('portfolio_data', JSON.stringify(data));
+    if (!fbAuth.currentUser) {
+      return { ok: false, error: { message: 'Kamu harus login dulu untuk menyimpan perubahan.' } };
+    }
+    await fbDB.ref('portfolioData').set(data);
+    // simpan cache lokal juga, supaya tetap ada walau koneksi internet putus
+    try { localStorage.setItem('portfolio_data', JSON.stringify(data)); } catch(e) {}
     return { ok: true };
   } catch (err) {
     return { ok: false, error: err };
   }
 }
 
-let DATA = loadData();
+// Tampilkan dulu data cache/lokal/default secepatnya (biar halaman tidak kosong),
+// lalu disusul data terbaru dari cloud begitu selesai dimuat.
+let DATA = loadLocalFallback();
+
+async function initDataFromCloud() {
+  try {
+    const snap = await fbDB.ref('portfolioData').once('value');
+    DATA = snap.exists() ? snap.val() : JSON.parse(JSON.stringify(DEFAULT));
+  } catch (e) {
+    console.error('Gagal memuat data dari cloud, menampilkan data lokal/default:', e);
+  }
+  renderPage();
+}
 
 // ========================
 // PAGINATION STATE
@@ -1160,8 +1212,36 @@ function enterEditMode() {
   editModeActive = true;
   document.body.classList.add('edit-mode');
   document.getElementById('editIndicator').classList.add('visible');
-  populateForm();
+  refreshAuthUI();
+  if (fbAuth.currentUser) populateForm();
   toggleEditPanel();
+}
+
+function refreshAuthUI() {
+  const loggedIn = !!fbAuth.currentUser;
+  document.getElementById('editLoginGate').style.display = loggedIn ? 'none' : 'block';
+  document.getElementById('editAuthedArea').style.display = loggedIn ? 'block' : 'none';
+}
+
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-password').value;
+  const errEl = document.getElementById('loginError');
+  errEl.textContent = '';
+  if (!email || !pass) { errEl.textContent = 'Email dan password wajib diisi.'; return; }
+  fbAuth.signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      document.getElementById('login-password').value = '';
+      refreshAuthUI();
+      populateForm();
+    })
+    .catch(err => {
+      errEl.textContent = 'Login gagal: ' + (err.message || 'periksa email/password kamu.');
+    });
+}
+
+function doLogout() {
+  fbAuth.signOut().then(() => refreshAuthUI());
 }
 
 function exitEditMode() {
@@ -1634,7 +1714,7 @@ function promptShowJSON(json) {
   w.document.write('<textarea style="width:100%;height:100%;font-family:monospace;font-size:12px;">' + json.replace(/</g,'&lt;') + '</textarea>');
 }
 
-function saveAll() {
+async function saveAll() {
   try {
     // Read profil form
     DATA.profil.name = document.getElementById('f-name').value;
@@ -1651,22 +1731,24 @@ function saveAll() {
       lbl: document.getElementById(`s${i}-lbl`).value
     }));
 
-    const result = saveData(DATA);
+    const t = document.getElementById('saveToast');
+    t.textContent = '⏳ Menyimpan ke cloud...';
+    t.classList.add('show');
+
+    const result = await saveData(DATA);
     if (!result.ok) {
+      t.classList.remove('show');
       const isQuota = result.error && (result.error.name === 'QuotaExceededError' || result.error.code === 22);
       if (isQuota) {
         alert(explainStorageFailure(result.error));
       } else {
-        alert('Gagal menyimpan perubahan: ' + (result.error ? result.error.message : 'penyebab tidak diketahui') + '\n\nCoba lagi atau hapus beberapa file besar.');
+        alert('Gagal menyimpan perubahan: ' + (result.error ? result.error.message : 'penyebab tidak diketahui'));
       }
       return;
     }
 
     renderPage();
-    // Toast
-    const t = document.getElementById('saveToast');
     t.textContent = '✓ Tersimpan!';
-    t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   } catch (err) {
     console.error('saveAll error:', err);
@@ -1689,7 +1771,8 @@ function resetAll() {
 // ========================
 // INIT
 // ========================
-renderPage();
+renderPage();          // tampil cepat pakai cache lokal/default dulu
+initDataFromCloud();   // lalu disusul data terbaru dari Firebase
 </script>
 
 </body>
