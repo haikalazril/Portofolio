@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haikal Azril Hikmatyar — Data Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital@1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f1ede4;
+      --surface: #ffffff;
+      --surface-alt: #e9e3d4;
+      --border: #20201c;
+      --border-strong: #3a3a32;
+      --border-soft: rgba(32,32,28,0.14);
+      --text-primary: #1c1b17;
+      --text-secondary: #524f45;
+      --text-muted: #8b8678;
+      --accent: #c8401f;
+      --accent-deep: #93290f;
+      --accent-bg: #f7ded3;
+      --accent-text: #93290f;
+      --ink: #1c1b17;
+      --radius: 0px;
+      --radius-lg: 0px;
+      --display: 'Archivo Expanded', sans-serif;
+      --body: 'Archivo', sans-serif;
+      --serif-em: 'Source Serif 4', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body); font-size: 16px; color: var(--text-primary); background: var(--bg); line-height: 1.55; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3.5rem); }
+    section { padding: 5.5rem 0; }
+    section + section { border-top: 3px solid var(--border); }
+
+    .eyebrow { font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 3px solid var(--border); }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .nav-logo { font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: -0.5px; cursor: pointer; user-select: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.25rem; }
+    .nav-links a { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-secondary); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 22px; background: var(--accent); color: #fff; border: 3px solid var(--border); cursor: pointer; transition: all 0.12s; box-shadow: 4px 4px 0 var(--border); }
+    .nav-cta:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--border); }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 3px; background: var(--ink); margin: 5px 0; }
+
+    #hero { padding: 4.5rem 0 0; border-top: none; }
+    .hero-inner { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: 0; align-items: stretch; border-bottom: 3px solid var(--border); }
+    .hero-text-col { padding-right: clamp(1rem, 4vw, 3.5rem); padding-bottom: 3rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent-deep); background: var(--accent-bg); border: 2px solid var(--border); padding: 5px 12px; margin-bottom: 1.5rem; }
+    .hero-badge .dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+    .hero h1 { font-family: var(--display); font-size: clamp(46px, 6.4vw, 92px); font-weight: 800; line-height: 0.94; letter-spacing: -2px; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .hero h1 .line2 { display: block; color: var(--accent); }
+    .hero-desc { font-family: var(--serif-em); font-style: italic; font-size: 19px; color: var(--text-secondary); line-height: 1.6; max-width: 580px; margin-bottom: 2rem; }
+    .hero-desc strong { color: var(--ink); font-weight: 600; font-style: normal; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 2.25rem; border-top: 2px solid var(--border); border-left: 2px solid var(--border); width: fit-content; }
+    .tag { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 7px 14px; color: var(--text-secondary); background: var(--surface); border-right: 2px solid var(--border); border-bottom: 2px solid var(--border); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 13px 26px; cursor: pointer; transition: all 0.12s; border: 3px solid var(--border); }
+    .btn-primary { background: var(--ink); color: #fff; box-shadow: 5px 5px 0 var(--accent); }
+    .btn-primary:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--accent); }
+    .btn-secondary { background: var(--surface); color: var(--ink); box-shadow: 5px 5px 0 var(--border); }
+    .btn-secondary:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--border); }
+
+    .avatar-wrap { position: relative; border: 3px solid var(--border); background: var(--accent); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; align-self: center; width: 100%; max-width: 380px; aspect-ratio: 4 / 5; max-height: 460px; margin: 1.5rem auto; box-shadow: 6px 6px 0 var(--border); }
+    .avatar { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; filter: grayscale(100%) contrast(1.1); mix-blend-mode: luminosity; }
+    .avatar-fallback { width: 100%; height: 100%; min-height: 320px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 96px; font-weight: 800; color: rgba(255,255,255,0.92); }
+    .avatar-tag { position: absolute; bottom: 14px; left: 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; background: var(--ink); padding: 5px 10px; z-index: 2; }
+    #hero-avatar.has-photo { background: var(--ink); }
+    #hero-avatar.has-photo img { width: 100%; height: 100%; object-fit: cover; display: block; position: static; filter: none; mix-blend-mode: normal; }
+
+    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 1.75rem clamp(1rem, 2vw, 2.25rem); border-right: 3px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--display); font-size: 38px; font-weight: 800; letter-spacing: -1px; color: var(--accent); }
+    .stat-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); margin-top: 4px; }
+
+    .section-label { font-family: var(--display); font-size: clamp(22px,2.6vw,32px); font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; color: var(--ink); margin-bottom: 2.5rem; display: flex; align-items: baseline; gap: 14px; }
+    .section-label::after { content: ''; flex: 1; height: 3px; background: var(--border); transform: translateY(-6px); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .skill-card { background: var(--surface); padding: 2rem; border: 3px solid var(--border); transition: background 0.15s, transform 0.12s; box-shadow: 5px 5px 0 var(--border); }
+    .skill-card:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--border); }
+    .skill-card:hover { background: var(--accent-bg); }
+    .skill-icon-wrap { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem; font-size: 21px; background: var(--ink); color: #fff; }
+    .skill-card h3 { font-family: var(--display); font-size: 17px; font-weight: 700; margin-bottom: 0.9rem; text-transform: uppercase; letter-spacing: -0.2px; }
+    .pill-group { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill { font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; background: var(--bg); border: 2px solid var(--border); color: var(--text-secondary); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .project-card { background: var(--surface); border: 3px solid var(--border); overflow: hidden; transition: background 0.15s, transform 0.12s; box-shadow: 6px 6px 0 var(--border); }
+    .project-card:hover { transform: translate(2px,2px); box-shadow: 4px 4px 0 var(--border); }
+    .project-card:hover { background: var(--accent-bg); }
+    .project-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 46px; position: relative; background: var(--surface-alt); border-bottom: 3px solid var(--border); }
+    .project-thumb::after { content: attr(data-idx); position: absolute; top: 10px; right: 12px; font-family: var(--display); font-size: 13px; font-weight: 800; color: var(--text-muted); }
+    .project-body { padding: 1.5rem 1.75rem 1.1rem; }
+    .project-badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 4px 11px; background: var(--accent); color: #fff; margin-bottom: 10px; }
+    .project-body h3 { font-family: var(--display); font-size: 19px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .project-body p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; }
+    .project-footer { padding: 1rem 1.75rem; border-top: 2px solid var(--border); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between; }
+    .project-footer .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-link { font-size: 12.5px; color: var(--accent); font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
+    .project-link:hover { text-decoration: underline; }
+
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item { display: grid; grid-template-columns: 56px 1fr; gap: 0 1.5rem; padding: 0 0 2.5rem; position: relative; }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 56px;
+      bottom: 0;
+      width: 2px;
+      background: rgba(32,32,28,0.3);
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+    .exp-dot { width: 56px; height: 56px; background: var(--surface); border: 3px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; position: relative; z-index: 1; overflow: hidden; box-shadow: 4px 4px 0 var(--border); filter: saturate(0.85); }
+    .exp-dot.exp-has-file { cursor: pointer; box-shadow: 4px 4px 0 var(--accent); }
+    .exp-dot.exp-has-file:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--accent); }
+    .exp-file-badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; padding: 2px 7px; background: var(--accent-bg); color: var(--accent-text); border: 1px solid var(--border); margin-left: 6px; vertical-align: middle; cursor: pointer; transition: background 0.12s, transform 0.12s; }
+    .exp-file-badge:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+    .exp-dot img { width: 100%; height: 100%; object-fit: contain; padding: 6px; background: #fff; }
+    .exp-content { padding-top: 8px; }
+    .exp-content h3 { font-family: var(--display); font-size: 18px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .exp-meta { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--accent); margin-bottom: 10px; }
+    .exp-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; max-width: 680px; }
+
+    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .cert-card { background: var(--surface); padding: 1.4rem 1.5rem; display: flex; align-items: flex-start; gap: 14px; border: 3px solid var(--border); transition: background 0.15s, transform 0.12s; box-shadow: 5px 5px 0 var(--border); }
+    .cert-card:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--border); }
+    .cert-card:hover { background: var(--accent-bg); }
+    .cert-emoji { font-size: 24px; flex-shrink: 0; margin-top: 1px; }
+    .cert-name { font-size: 13.5px; font-weight: 700; line-height: 1.4; }
+    .cert-org { font-size: 11.5px; color: var(--text-muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+    #contact { text-align: center; }
+    #contact .section-label { justify-content: center; }
+    #contact .section-label::after { display: none; }
+    #contact h2 { font-family: var(--display); font-size: clamp(34px,4.5vw,56px); font-weight: 800; letter-spacing: -1.5px; text-transform: uppercase; margin-bottom: 0.75rem; }
+    #contact p { font-family: var(--serif-em); font-style: italic; font-size: 17px; color: var(--text-secondary); max-width: 480px; margin: 0 auto 2.5rem; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+    .contact-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 12px 26px; background: var(--surface); border: 3px solid var(--border); color: var(--ink); transition: all 0.12s; box-shadow: 4px 4px 0 var(--border); }
+    .contact-link:hover { background: var(--accent); color: #fff; transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--border); }
+    .contact-link svg { width: 16px; height: 16px; fill: currentColor; }
+    footer { border-top: 3px solid var(--border); padding: 1.5rem 0; text-align: center; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); }
+
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: block; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .avatar-wrap { order: -1; min-height: 220px; max-height: 320px; border-left: 3px solid var(--border); margin: 1.5rem auto; }
+      .avatar-fallback { min-height: 220px; font-size: 56px; }
+      .hero-text-col { padding-right: 0; padding-top: 2.5rem; padding-bottom: 2.5rem; }
+      .hero h1 { font-size: 42px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3), .stat-item:nth-child(4) { border-top: 3px solid var(--border); }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-card { border-right: none; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { border-right: none !important; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .cert-card { border-right: none !important; }
+      .exp-item { grid-template-columns: 44px 1fr; }
+      .exp-item:not(:last-child)::before { left: 22px; top: 44px; }
+      .exp-dot { width: 44px; height: 44px; font-size: 18px; }
+    }
+
+    @media (min-width: 1400px) {
+      .hero h1 { font-size: 100px; }
+    }
+
+    /* =====================
+       EDIT MODE STYLES
+    ===================== */
+    .edit-indicator {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1a1a18;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 99px;
+      z-index: 9999;
+      display: none;
+      gap: 8px;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .edit-indicator.visible { display: flex; }
+    .edit-indicator .dot-red { width: 7px; height: 7px; background: #ef4444; border-radius: 50%; animation: blink 1s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .edit-indicator button { background: none; border: none; color: #9b9a96; cursor: pointer; font-size: 11px; text-decoration: underline; }
+    .edit-indicator button:hover { color: #fff; }
+
+    /* Edit panel overlay */
+    .edit-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: 400px;
+      height: 100vh;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 9998;
+      display: none;
+      flex-direction: column;
+      box-shadow: -8px 0 32px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .edit-panel.open { display: flex; }
+    .edit-panel-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .edit-panel-header h3 { font-size: 14px; font-weight: 600; }
+    .edit-panel-header .close-btn { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--text-muted); line-height: 1; }
+    .edit-panel-header .close-btn:hover { color: var(--text-primary); }
+
+    .edit-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      overflow-x: auto;
+    }
+    .edit-tab {
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .edit-tab.active { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+    .edit-body { flex: 1; overflow-y: auto; padding: 1.25rem; }
+    .edit-section { display: none; }
+    .edit-section.active { display: block; }
+
+    .edit-field { margin-bottom: 1rem; }
+    .edit-field label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 5px; }
+    .edit-field input, .edit-field textarea {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text-primary);
+      transition: border-color 0.15s;
+      resize: vertical;
+    }
+    .edit-field input:focus, .edit-field textarea:focus { outline: none; border-color: var(--accent); }
+    .edit-field textarea { min-height: 70px; }
+
+    .edit-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      margin-bottom: 10px;
+    }
+    .edit-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .edit-card-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+    .edit-card-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+    .btn-move { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 13px; padding: 2px 6px; border-radius: 4px; line-height: 1; }
+    .btn-move:hover:not(:disabled) { background: var(--accent-bg); color: var(--accent-text); }
+    .btn-move:disabled { opacity: 0.25; cursor: default; }
+    .btn-delete { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px; }
+    .btn-delete:hover { background: #fee2e2; color: #dc2626; }
+
+    .btn-add {
+      width: 100%;
+      padding: 9px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius);
+      background: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      margin-top: 4px;
+      transition: all 0.15s;
+    }
+    .btn-add:hover { background: var(--surface-alt); color: var(--text-primary); }
+
+    .edit-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .btn-save {
+      flex: 1;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-save:hover { opacity: 0.85; }
+    .btn-reset {
+      padding: 9px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+    .btn-reset:hover { border-color: #dc2626; color: #dc2626; }
+
+    .save-toast {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #16a34a;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 99px;
+      z-index: 99999;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .save-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Highlight editable elements in edit mode */
+    body.edit-mode [data-editable]:hover {
+      outline: 2px dashed var(--accent);
+      outline-offset: 2px;
+      cursor: pointer;
+    }
+
+    /* Photo upload UI */
+    .photo-upload-area {
+      border: 2px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .photo-upload-area:hover { border-color: var(--accent); background: var(--accent-bg); }
+    .photo-upload-area input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 1; }
+    .photo-preview-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 6px;
+      display: block;
+      border: 2px solid var(--border);
+    }
+    .photo-preview-avatar.placeholder {
+      background: linear-gradient(135deg,#bfdbfe,#bbf7d0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 700; color: #1d4ed8;
+      width: 64px; height: 64px; border-radius: 50%;
+      margin: 0 auto 6px;
+    }
+    .photo-preview-project {
+      width: 100%; height: 70px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 6px;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .photo-upload-hint { font-size: 11px; color: var(--text-muted); position: relative; z-index: 0; }
+    .photo-upload-hint strong { color: var(--accent-text); }
+    .btn-remove-photo {
+      font-size: 11px;
+      color: #dc2626;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 4px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .btn-remove-photo:hover { text-decoration: underline; }
+
+    /* Upload progress bar */
+    .upload-progress-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: 8px;
+      pointer-events: none;
+    }
+    .upload-progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .upload-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.12s linear;
+    }
+    .upload-progress-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-text);
+      margin-top: 4px;
+    }
+
+    /* Avatar rendered as img when photo set — square crop to match the square wrap */
+    #hero-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+
+    /* =====================
+       PAGINATION
+    ===================== */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 2rem;
+    }
+    .page-btn {
+      min-width: 34px;
+      height: 34px;
+      padding: 0 10px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .page-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-text); }
+    .page-btn.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+    .page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* =====================
+       CERT CARD WITH UPLOAD
+    ===================== */
+    .cert-card { cursor: pointer; position: relative; }
+    .cert-thumb {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cert-has-file .cert-emoji { position: relative; }
+    .cert-has-file .cert-emoji::after {
+      content: '📎';
+      font-size: 10px;
+      position: absolute;
+      bottom: -2px;
+      right: -4px;
+    }
+    .cert-upload-badge {
+      position: absolute;
+      top: 8px; right: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      border-radius: 99px;
+      border: 1px solid var(--accent-border);
+    }
+
+    /* =====================
+       CERT PREVIEW MODAL
+    ===================== */
+    .cert-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 99990;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .cert-modal-overlay.open { display: flex; }
+    .cert-modal {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .cert-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cert-modal-header h3 { font-size: 14px; font-weight: 600; }
+    .cert-modal-close {
+      background: none; border: none; font-size: 22px;
+      cursor: pointer; color: var(--text-muted); line-height: 1;
+    }
+    .cert-modal-close:hover { color: var(--text-primary); }
+    .cert-modal-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-alt);
+    }
+    .cert-modal-body img { max-width: 100%; max-height: 65vh; border-radius: var(--radius); border: 1px solid var(--border); }
+    .cert-modal-body iframe { width: 100%; height: 65vh; border: none; border-radius: var(--radius); }
+    .cert-modal-body .cert-no-file {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .cert-modal-body .cert-no-file .big { font-size: 48px; margin-bottom: 0.5rem; }
+    .cert-modal-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .cert-modal-footer .cert-info { flex: 1; }
+    .cert-modal-footer .cert-info strong { font-size: 14px; font-weight: 600; display: block; }
+    .cert-modal-footer .cert-info span { font-size: 12px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<!-- EDIT INDICATOR (bottom right) -->
+<div class="edit-indicator" id="editIndicator">
+  <span class="dot-red"></span>
+  Mode Edit Aktif
+  <button onclick="toggleEditPanel()">Buka Panel</button>
+  <button onclick="exitEditMode()" style="margin-left:4px">Keluar</button>
+</div>
+
+<!-- SAVE TOAST -->
+<div class="save-toast" id="saveToast">✓ Tersimpan!</div>
+
+<!-- CERT PREVIEW MODAL -->
+<div class="cert-modal-overlay" id="certModalOverlay" onclick="closeCertModal(event)">
+  <div class="cert-modal">
+    <div class="cert-modal-header">
+      <h3>📄 Preview Sertifikat</h3>
+      <button class="cert-modal-close" onclick="closeCertModalDirect()">×</button>
+    </div>
+    <div class="cert-modal-body" id="certModalBody">
+      <div class="cert-no-file"><div class="big">📂</div>Belum ada file sertifikat</div>
+    </div>
+    <div class="cert-modal-footer">
+      <div class="cert-info">
+        <strong id="certModalName">—</strong>
+        <span id="certModalOrg">—</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cert-modal-overlay" id="expModalOverlay" onclick="closeExpModal(event)">
+  <div class="cert-modal">
+    <div class="cert-modal-header">
+      <h3>📄 Preview Dokumen</h3>
+      <button class="cert-modal-close" onclick="closeExpModalDirect()">×</button>
+    </div>
+    <div class="cert-modal-body" id="expModalBody">
+      <div class="cert-no-file"><div class="big">📂</div>Belum ada file pendukung</div>
+    </div>
+    <div class="cert-modal-footer">
+      <div class="cert-info">
+        <strong id="expModalName">—</strong>
+        <span id="expModalOrg">—</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT PANEL -->
+<div class="edit-panel" id="editPanel">
+  <div class="edit-panel-header">
+    <h3>✏️ Edit Portofolio</h3>
+    <button class="close-btn" onclick="toggleEditPanel()">×</button>
+  </div>
+  <div class="edit-tabs" id="editTabs">
+    <button class="edit-tab active" onclick="switchTab('profil')">Profil</button>
+    <button class="edit-tab" onclick="switchTab('skills')">Skills</button>
+    <button class="edit-tab" onclick="switchTab('projects')">Projects</button>
+    <button class="edit-tab" onclick="switchTab('experience')">Pengalaman</button>
+    <button class="edit-tab" onclick="switchTab('certs')">Sertifikat</button>
+  </div>
+  <div class="edit-body">
+
+    <!-- TAB: PROFIL -->
+    <div class="edit-section active" id="tab-profil">
+      <div class="edit-field">
+        <label>Foto Profil</label>
+        <div class="photo-upload-area" id="avatar-upload-area">
+          <input type="file" accept="image/*" id="avatar-file-input" onchange="handleAvatarUpload(event)">
+          <div id="avatar-preview-wrap">
+            <div class="photo-preview-avatar placeholder" id="avatar-preview-placeholder">HA</div>
+          </div>
+          <div class="photo-upload-hint">Klik atau drag foto ke sini<br><strong>JPG, PNG, WebP</strong> — maks 2MB</div>
+          <button class="btn-remove-photo" id="avatar-remove-btn" onclick="removeAvatar(event)" style="display:none">✕ Hapus foto</button>
+        </div>
+      </div>
+      <div class="edit-field"><label>Nama Lengkap</label><input id="f-name" type="text" placeholder="Nama kamu"></div>
+      <div class="edit-field"><label>Badge Status</label><input id="f-badge" type="text" placeholder="Terbuka untuk peluang baru"></div>
+      <div class="edit-field"><label>Deskripsi Singkat</label><textarea id="f-desc"></textarea></div>
+      <div class="edit-field"><label>Tags (pisahkan dengan koma)</label><input id="f-tags" type="text" placeholder="Data Engineering, SQL, Python"></div>
+      <div class="edit-field"><label>Link CV (PDF)</label><input id="f-cv" type="text" placeholder="cv.pdf"></div>
+      <div class="edit-field"><label>Link GitHub</label><input id="f-github" type="text" placeholder="https://github.com/..."></div>
+      <div style="border-top:1px solid var(--border);margin:1rem 0;padding-top:1rem">
+        <div class="edit-field"><label>Stat 1 — Angka</label><input id="s1-num" type="text" placeholder="1"></div>
+        <div class="edit-field"><label>Stat 1 — Label</label><input id="s1-lbl" type="text" placeholder="Tahun pengalaman"></div>
+        <div class="edit-field"><label>Stat 2 — Angka</label><input id="s2-num" type="text" placeholder="5+"></div>
+        <div class="edit-field"><label>Stat 2 — Label</label><input id="s2-lbl" type="text" placeholder="Project selesai"></div>
+        <div class="edit-field"><label>Stat 3 — Angka</label><input id="s3-num" type="text" placeholder="3"></div>
+        <div class="edit-field"><label>Stat 3 — Label</label><input id="s3-lbl" type="text" placeholder="Sertifikasi"></div>
+        <div class="edit-field"><label>Stat 4 — Angka</label><input id="s4-num" type="text" placeholder="2"></div>
+        <div class="edit-field"><label>Stat 4 — Label</label><input id="s4-lbl" type="text" placeholder="Domain keahlian"></div>
+      </div>
+      <div style="border-top:1px solid var(--border);margin:1rem 0;padding-top:1rem">
+        <div class="edit-field"><label>LinkedIn URL</label><input id="f-linkedin" type="text" placeholder="https://linkedin.com/in/..."></div>
+        <div class="edit-field"><label>Email</label><input id="f-email" type="text" placeholder="kamu@email.com"></div>
+        <div class="edit-field"><label>Teks Footer</label><input id="f-footer" type="text" placeholder="© 2025 Nama Kamu · ..."></div>
+      </div>
+    </div>
+
+    <!-- TAB: SKILLS -->
+    <div class="edit-section" id="tab-skills">
+      <div id="skills-editor"></div>
+      <button class="btn-add" onclick="addSkillCard()">+ Tambah Skill Card</button>
+    </div>
+
+    <!-- TAB: PROJECTS -->
+    <div class="edit-section" id="tab-projects">
+      <div id="projects-editor"></div>
+      <button class="btn-add" onclick="addProjectCard()">+ Tambah Project</button>
+    </div>
+
+    <!-- TAB: EXPERIENCE -->
+    <div class="edit-section" id="tab-experience">
+      <div id="experience-editor"></div>
+      <button class="btn-add" onclick="addExpItem()">+ Tambah Pengalaman</button>
+    </div>
+
+    <!-- TAB: CERTS -->
+    <div class="edit-section" id="tab-certs">
+      <div id="certs-editor"></div>
+      <button class="btn-add" onclick="addCertCard()">+ Tambah Sertifikat</button>
+    </div>
+
+  </div>
+  <div class="edit-footer">
+    <button class="btn-save" onclick="saveAll()">💾 Simpan Perubahan</button>
+    <button class="btn-save" style="background:var(--surface-alt);color:var(--ink);margin-top:8px;" onclick="exportDataJSON()">📋 Export Data (untuk publish)</button>
+    <button class="btn-reset" onclick="resetAll()" title="Hapus semua data tersimpan">Reset</button>
+  </div>
+</div>
+
+<!-- ======================== PAGE CONTENT ======================== -->
+
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <div class="nav-logo" id="navLogo" onclick="handleLogoClick()" title="">HA</div>
+      <ul class="nav-links">
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Hire me</a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('.nav-links').style.flexDirection='column'; document.querySelector('.nav-links').style.position='absolute'; document.querySelector('.nav-links').style.top='56px'; document.querySelector('.nav-links').style.left='0'; document.querySelector('.nav-links').style.width='100%'; document.querySelector('.nav-links').style.background='#f8f7f4'; document.querySelector('.nav-links').style.padding='1rem 1.5rem'; document.querySelector('.nav-links').style.borderBottom='1px solid #e5e4e0';" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text-col">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span id="hero-badge-text">Terbuka untuk peluang baru</span>
+        </div>
+        <h1 id="hero-name">Haikal Azril Hikmatyar</h1>
+        <p class="hero-desc" id="hero-desc">S1 Sistem Informasi dengan pengalaman di <strong>report development</strong>, <strong>data engineering</strong>, dan <strong>analisis data</strong>. Terbiasa mengelola data dari proses entry, pipeline, hingga visualisasi laporan.</p>
+        <div class="hero-tags" id="hero-tags">
+          <span class="tag">Data Engineering</span>
+          <span class="tag">Report Design</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Tableau</span>
+        </div>
+        <div class="hero-actions">
+          <a href="cv.pdf" class="btn btn-primary" id="hero-cv-btn" download>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download CV
+          </a>
+          <a href="https://github.com/usernamekamu" class="btn btn-secondary" id="hero-github-btn" target="_blank" rel="noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="avatar-wrap">
+        <div class="avatar-fallback" id="hero-avatar">HA</div>
+        <div class="avatar-tag">Profil</div>
+      </div>
+      <style>
+        #hero-avatar.has-photo { background: var(--ink); padding: 0; overflow: hidden; position: static; }
+        #hero-avatar.has-photo img { width: 100%; height: 100%; object-fit: cover; display: block; position: static; filter: none; mix-blend-mode: normal; }
+      </style>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item"><div class="stat-num" id="s1-num-el">1</div><div class="stat-label" id="s1-lbl-el">Tahun pengalaman</div></div>
+      <div class="stat-item"><div class="stat-num" id="s2-num-el">5+</div><div class="stat-label" id="s2-lbl-el">Project selesai</div></div>
+      <div class="stat-item"><div class="stat-num" id="s3-num-el">3</div><div class="stat-label" id="s3-lbl-el">Sertifikasi</div></div>
+      <div class="stat-item"><div class="stat-num" id="s4-num-el">2</div><div class="stat-label" id="s4-lbl-el">Domain keahlian</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Skills & Tools</div>
+    <div class="skills-grid" id="skills-grid">
+      <!-- rendered by JS -->
+    </div>
+    <div class="pagination" id="skills-pagination"></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <div class="projects-grid" id="projects-grid">
+      <!-- rendered by JS -->
+    </div>
+    <div class="pagination" id="projects-pagination"></div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label">All Experience</div>
+    <div class="exp-list" id="exp-list">
+      <!-- rendered by JS -->
+    </div>
+    <div class="pagination" id="exp-pagination"></div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <div class="section-label">Certifications</div>
+    <div class="certs-grid" id="certs-grid">
+      <!-- rendered by JS -->
+    </div>
+    <div class="pagination" id="certs-pagination"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Mari terhubung 👋</h2>
+    <p>Terbuka untuk peluang baru di bidang data — full-time, freelance, atau kolaborasi project.</p>
+    <div class="contact-links" id="contact-links">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container" id="footer-text">
+    © 2025 Haikal Azril Hikmatyar · Dibuat dengan HTML biasa 🤙
+  </div>
+</footer>
+
+<script>
+// ========================
+// DEFAULT DATA
+// ========================
+const DEFAULT = {
+  profil: {
+    name: 'Haikal Azril Hikmatyar',
+    badge: 'Terbuka untuk peluang baru',
+    desc: 'S1 Sistem Informasi dengan pengalaman di <strong>report development</strong>, <strong>data engineering</strong>, dan <strong>analisis data</strong>. Terbiasa mengelola data dari proses entry, pipeline, hingga visualisasi laporan.',
+    tags: 'Data Engineering, Report Design, Data Analysis, SQL, Python, Tableau',
+    avatarPhoto: '',
+    cv: 'cv.pdf',
+    github: 'https://github.com/usernamekamu',
+    linkedin: 'https://linkedin.com/in/haikal-azril-hikmatyar',
+    email: 'haikalazrilhikmatyar@kamu.com',
+    footer: '© 2025 Haikal Azril Hikmatyar · Dibuat dengan HTML biasa 🤙',
+    stats: [
+      {num:'1', lbl:'Tahun pengalaman'},
+      {num:'5+', lbl:'Project selesai'},
+      {num:'3', lbl:'Sertifikasi'},
+      {num:'2', lbl:'Domain keahlian'}
+    ]
+  },
+  skills: [
+    { icon:'🗄️', color:'blue', title:'Data Engineering', pills:'SQL, ETL, Data Pipeline, Data Modeling, Python, Power Query' },
+    { icon:'📊', color:'purple', title:'Report & Visualization', pills:'Power BI, Tableau, Looker Studio, Excel, Dashboard Design' },
+    { icon:'🔍', color:'green', title:'Data Analysis', pills:'Python, Pandas, NumPy, EDA, Statistical Analysis' }
+  ],
+  projects: [
+    { emoji:'🔁', color:'c1', badge:'Data Engineering', title:'ETL Pipeline Otomatis', desc:'Pipeline dari CSV ke database hingga dashboard dengan Python & SQL. Mengotomasi proses pelaporan harian dan mengurangi waktu proses 70%.', pills:'Python, SQL, Power BI', link:'https://github.com/usernamekamu/nama-repo', photo:'' },
+    { emoji:'📈', color:'c2', badge:'Dashboard', title:'Sales Performance Dashboard', desc:'Dashboard interaktif analisis penjualan dengan drill-down per region, produk, dan periode waktu menggunakan Power BI.', pills:'Power BI, DAX, SQL', link:'#', photo:'' },
+    { emoji:'🗺️', color:'c3', badge:'Data Analysis', title:'Analisis Data Publik BPS', desc:'Eksplorasi dan visualisasi dataset BPS untuk mengidentifikasi tren ekonomi regional Indonesia menggunakan Python.', pills:'Python, Pandas, Matplotlib', link:'#', photo:'' },
+    { emoji:'📋', color:'c4', badge:'Report Design', title:'Template Laporan Otomatis', desc:'Template Excel + macro untuk otomasi laporan mingguan, mengurangi waktu pelaporan hingga 80% dari proses manual.', pills:'Excel, VBA, Power Query', link:'#', photo:'' }
+  ],
+  experience: [
+    { icon:'💼', title:'Report Developer — PT Benang Citra Indonesia & PT Lucky Print Abadi', meta:'2024 – Sekarang · Full-time · Outsource PT Rekatama Digdaya Solusi', desc:'Membantu proses pengolahan data (ETL) serta memastikan kualitas dan kesiapan data untuk kebutuhan reporting. Menyusun dan mengelola query SQL serta membantu pengembangan database staging (PostgreSQL).', file:'', fileType:'' },
+    { icon:'📊', title:'Data Analyst Bootcamp — [Nama Lembaga]', meta:'2023 · Bootcamp', desc:'Pelatihan intensif analisis data dengan Python, SQL, dan visualisasi data. Menyelesaikan proyek akhir berbasis studi kasus nyata.', file:'', fileType:'' },
+    { icon:'📣', title:'Digital Marketing Training — [Nama Lembaga]', meta:'2023 · Pelatihan', desc:'Pelatihan pemasaran digital mencakup strategi konten, SEO, dan analisis performa kampanye.', file:'', fileType:'' },
+    { icon:'🤝', title:'[Jabatan] — [Nama Organisasi]', meta:'20XX – 20XX · Organisasi', desc:'Bertanggung jawab atas [tugas utama].', file:'', fileType:'' },
+    { icon:'🎓', title:'S1 Sistem Informasi — [Nama Universitas]', meta:'20XX – 20XX', desc:'Fokus pada manajemen basis data, pengembangan sistem informasi, dan analisis bisnis berbasis data.', file:'', fileType:'' }
+  ],
+  certs: [
+    { emoji:'📈', name:'Data Analyst Bootcamp', org:'[Nama Lembaga] · 2023' },
+    { emoji:'📣', name:'Digital Marketing', org:'[Nama Lembaga] · 2023' },
+    { emoji:'🏅', name:'[Nama Sertifikat]', org:'[Lembaga] · 202X' }
+  ]
+};
+
+// ========================
+// LOAD / SAVE
+// ========================
+function loadData() {
+  try {
+    const raw = localStorage.getItem('portfolio_data');
+    return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT));
+  } catch(e) { return JSON.parse(JSON.stringify(DEFAULT)); }
+}
+
+function saveData(data) {
+  try {
+    localStorage.setItem('portfolio_data', JSON.stringify(data));
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err };
+  }
+}
+
+let DATA = loadData();
+
+// ========================
+// PAGINATION STATE
+// ========================
+const PAGE = { skills: 1, projects: 1, exp: 1, certs: 1 };
+const PER_PAGE = { skills: 6, projects: 4, exp: 6, certs: 6 };
+
+function makePagination(containerId, total, perPage, currentPage, onChangeFn) {
+  const el = document.getElementById(containerId);
+  const totalPages = Math.ceil(total / perPage);
+  if (totalPages <= 1) { el.innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="${onChangeFn}(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="${onChangeFn}(${i})">${i}</button>`;
+  }
+  html += `<button class="page-btn" onclick="${onChangeFn}(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>›</button>`;
+  el.innerHTML = html;
+}
+
+function goSkillsPage(p) { PAGE.skills = p; renderSkillsPage(); }
+function goProjectsPage(p) { PAGE.projects = p; renderProjectsPage(); }
+function goExpPage(p) { PAGE.exp = p; renderExpPage(); }
+function goCertsPage(p) { PAGE.certs = p; renderCertsPage(); }
+
+function renderSkillsPage() {
+  const all = DATA.skills;
+  const pp = PER_PAGE.skills;
+  const start = (PAGE.skills-1)*pp;
+  const slice = all.slice(start, start+pp);
+  document.getElementById('skills-grid').innerHTML = slice.map(s => `
+    <div class="skill-card">
+      <div class="skill-icon-wrap ${s.color}">${s.icon}</div>
+      <h3>${s.title}</h3>
+      <div class="pill-group">${s.pills.split(',').map(p=>`<span class="pill">${p.trim()}</span>`).join('')}</div>
+    </div>`).join('');
+  makePagination('skills-pagination', all.length, pp, PAGE.skills, 'goSkillsPage');
+}
+
+function renderProjectsPage() {
+  const all = DATA.projects;
+  const pp = PER_PAGE.projects;
+  const start = (PAGE.projects-1)*pp;
+  const slice = all.slice(start, start+pp);
+  const colors = ['c1','c2','c3','c4'];
+  document.getElementById('projects-grid').innerHTML = slice.map((pr,i) => {
+    const realIdx = start + i;
+    const thumbContent = pr.photo
+      ? `<img src="${pr.photo}" alt="${pr.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`
+      : pr.emoji;
+    return `
+    <div class="project-card">
+      <div class="project-thumb ${pr.photo ? '' : (pr.color || colors[realIdx%4])}" style="${pr.photo ? 'padding:0;font-size:0;' : ''}">${thumbContent}</div>
+      <div class="project-body">
+        <span class="project-badge">${pr.badge}</span>
+        <h3>${pr.title}</h3>
+        <p>${pr.desc}</p>
+      </div>
+      <div class="project-footer">
+        <div class="pills">${pr.pills.split(',').map(p=>`<span class="pill">${p.trim()}</span>`).join('')}</div>
+        <a href="${pr.link}" class="project-link" target="_blank" rel="noopener">Lihat →</a>
+      </div>
+    </div>`;
+  }).join('');
+  makePagination('projects-pagination', all.length, pp, PAGE.projects, 'goProjectsPage');
+}
+
+function renderExpPage() {
+  const all = DATA.experience;
+  const pp = PER_PAGE.exp;
+  const start = (PAGE.exp-1)*pp;
+  const slice = all.slice(start, start+pp);
+  document.getElementById('exp-list').innerHTML = slice.map((e,i) => {
+    const realIdx = start + i;
+    const hasFile = !!e.file;
+    return `
+    <div class="exp-item" style="${i===slice.length-1?'padding-bottom:0':''}">
+      <div class="exp-dot ${hasFile?'exp-has-file':''}" ${hasFile?`onclick="openExpModal(${realIdx})" title="Lihat file pendukung"`:''}>${e.icon}</div>
+      <div class="exp-content">
+        <h3>${e.title}</h3>
+        <div class="exp-meta">${e.meta}${hasFile?` <span class="exp-file-badge" onclick="openExpModal(${realIdx})" title="Lihat file pendukung">📎 FILE</span>`:''}</div>
+        <p>${e.desc}</p>
+      </div>
+    </div>`;
+  }).join('');
+  makePagination('exp-pagination', all.length, pp, PAGE.exp, 'goExpPage');
+}
+
+function renderCertsPage() {
+  const all = DATA.certs;
+  const pp = PER_PAGE.certs;
+  const start = (PAGE.certs-1)*pp;
+  const slice = all.slice(start, start+pp);
+  document.getElementById('certs-grid').innerHTML = slice.map((c, i) => {
+    const realIdx = start + i;
+    const hasFile = !!(c.file);
+    return `
+    <div class="cert-card ${hasFile ? 'cert-has-file' : ''}" onclick="openCertModal(${realIdx})">
+      ${hasFile ? '<span class="cert-upload-badge">📎 File</span>' : ''}
+      <span class="cert-emoji">${c.emoji}</span>
+      <div>
+        <div class="cert-name">${c.name}</div>
+        <div class="cert-org">${c.org}</div>
+      </div>
+    </div>`;
+  }).join('');
+  makePagination('certs-pagination', all.length, pp, PAGE.certs, 'goCertsPage');
+}
+
+// ========================
+// CERT MODAL
+// ========================
+function openCertModal(idx) {
+  const c = DATA.certs[idx];
+  document.getElementById('certModalName').textContent = c.name;
+  document.getElementById('certModalOrg').textContent = c.org;
+  const body = document.getElementById('certModalBody');
+  if (c.file) {
+    const isPdf = c.fileType === 'application/pdf';
+    if (isPdf) {
+      body.innerHTML = `<iframe src="${c.file}#toolbar=0&navpanes=0" title="${c.name}"></iframe>`;
+    } else {
+      body.innerHTML = `<img src="${c.file}" alt="${c.name}" oncontextmenu="return false">`;
+    }
+  } else {
+    body.innerHTML = `<div class="cert-no-file"><div class="big">📂</div>Belum ada file sertifikat.<br>Upload file di mode edit.</div>`;
+  }
+  document.getElementById('certModalOverlay').classList.add('open');
+}
+function closeCertModal(e) {
+  if (e.target === document.getElementById('certModalOverlay')) closeCertModalDirect();
+}
+function closeCertModalDirect() {
+  document.getElementById('certModalOverlay').classList.remove('open');
+}
+
+function openExpModal(idx) {
+  const e = DATA.experience[idx];
+  document.getElementById('expModalName').textContent = e.title;
+  document.getElementById('expModalOrg').textContent = e.meta;
+  const body = document.getElementById('expModalBody');
+  if (e.file) {
+    const isPdf = e.fileType === 'application/pdf';
+    if (isPdf) {
+      body.innerHTML = `<iframe src="${e.file}#toolbar=0&navpanes=0" title="${e.title}"></iframe>`;
+    } else {
+      body.innerHTML = `<img src="${e.file}" alt="${e.title}" oncontextmenu="return false">`;
+    }
+  } else {
+    body.innerHTML = `<div class="cert-no-file"><div class="big">📂</div>Belum ada file pendukung untuk pengalaman ini.</div>`;
+  }
+  document.getElementById('expModalOverlay').classList.add('open');
+}
+function closeExpModal(e) {
+  if (e.target === document.getElementById('expModalOverlay')) closeExpModalDirect();
+}
+function closeExpModalDirect() {
+  document.getElementById('expModalOverlay').classList.remove('open');
+}
+
+// ========================
+// RENDER PAGE
+// ========================
+function renderPage() {
+  const d = DATA;
+  const p = d.profil;
+
+  // Reset pagination to page 1 when re-rendering
+  PAGE.skills = 1; PAGE.projects = 1; PAGE.exp = 1; PAGE.certs = 1;
+
+  // Profil
+  document.getElementById('hero-name').textContent = p.name;
+  document.getElementById('hero-badge-text').textContent = p.badge;
+  document.getElementById('hero-desc').innerHTML = p.desc;
+  document.getElementById('footer-text').textContent = p.footer;
+  document.title = p.name + ' — Data Professional';
+
+  // Avatar: photo or initials
+  const avatarEl = document.getElementById('hero-avatar');
+  if (p.avatarPhoto) {
+    avatarEl.classList.add('has-photo');
+    avatarEl.innerHTML = `<img src="${p.avatarPhoto}" alt="Foto profil">`;
+  } else {
+    avatarEl.classList.remove('has-photo');
+    const initials = p.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    avatarEl.textContent = initials;
+  }
+
+  // Tags
+  const tagsEl = document.getElementById('hero-tags');
+  tagsEl.innerHTML = p.tags.split(',').map(t=>`<span class="tag">${t.trim()}</span>`).join('');
+
+  // CV & GitHub buttons
+  document.getElementById('hero-cv-btn').href = p.cv;
+  document.getElementById('hero-github-btn').href = p.github;
+
+  // Stats
+  p.stats.forEach((s,i) => {
+    document.getElementById(`s${i+1}-num-el`).textContent = s.num;
+    document.getElementById(`s${i+1}-lbl-el`).textContent = s.lbl;
+  });
+
+  // Skills
+  renderSkillsPage();
+
+  // Projects
+  renderProjectsPage();
+
+  // Experience
+  renderExpPage();
+
+  // Certs
+  renderCertsPage();
+
+  // Contact
+  document.getElementById('contact-links').innerHTML = `
+    <a href="${p.linkedin}" class="contact-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="${p.github}" class="contact-link" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a href="mailto:${p.email}" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      ${p.email}
+    </a>`;
+}
+
+// ========================
+// EDIT MODE — SECRET TRIGGER
+// Klik logo 5x dalam 3 detik
+// ========================
+let logoClicks = 0, logoTimer = null;
+function handleLogoClick() {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  if (logoClicks >= 5) {
+    logoClicks = 0;
+    enterEditMode();
+  } else {
+    logoTimer = setTimeout(() => { logoClicks = 0; }, 3000);
+  }
+}
+
+let editModeActive = false;
+function enterEditMode() {
+  editModeActive = true;
+  document.body.classList.add('edit-mode');
+  document.getElementById('editIndicator').classList.add('visible');
+  populateForm();
+  toggleEditPanel();
+}
+
+function exitEditMode() {
+  editModeActive = false;
+  document.body.classList.remove('edit-mode');
+  document.getElementById('editIndicator').classList.remove('visible');
+  document.getElementById('editPanel').classList.remove('open');
+}
+
+function toggleEditPanel() {
+  document.getElementById('editPanel').classList.toggle('open');
+}
+
+// ========================
+// SWITCH TABS
+// ========================
+function switchTab(name) {
+  document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.edit-section').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'skills') renderSkillsEditor();
+  if (name === 'projects') renderProjectsEditor();
+  if (name === 'experience') renderExpEditor();
+  if (name === 'certs') renderCertsEditor();
+}
+
+// ========================
+// POPULATE FORM FROM DATA
+// ========================
+function populateForm() {
+  const p = DATA.profil;
+  document.getElementById('f-name').value = p.name;
+  document.getElementById('f-badge').value = p.badge;
+  document.getElementById('f-desc').value = p.desc;
+  document.getElementById('f-tags').value = p.tags;
+  document.getElementById('f-cv').value = p.cv;
+  document.getElementById('f-github').value = p.github;
+  document.getElementById('f-linkedin').value = p.linkedin;
+  document.getElementById('f-email').value = p.email;
+  document.getElementById('f-footer').value = p.footer;
+  p.stats.forEach((s,i) => {
+    document.getElementById(`s${i+1}-num`).value = s.num;
+    document.getElementById(`s${i+1}-lbl`).value = s.lbl;
+  });
+  refreshAvatarPreview();
+  renderSkillsEditor();
+  renderProjectsEditor();
+  renderExpEditor();
+  renderCertsEditor();
+}
+
+// ========================
+// AVATAR PHOTO UPLOAD
+// ========================
+function refreshAvatarPreview() {
+  const wrap = document.getElementById('avatar-preview-wrap');
+  const removeBtn = document.getElementById('avatar-remove-btn');
+  const photo = DATA.profil.avatarPhoto;
+  if (photo) {
+    wrap.innerHTML = `<img src="${photo}" class="photo-preview-avatar" alt="Preview">`;
+    removeBtn.style.display = 'block';
+  } else {
+    const initials = (DATA.profil.name||'HA').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    wrap.innerHTML = `<div class="photo-preview-avatar placeholder">${initials}</div>`;
+    removeBtn.style.display = 'none';
+  }
+}
+
+// ========================
+// UPLOAD PROGRESS HELPERS
+// ========================
+function showUploadProgress(area) {
+  if (!area) return null;
+  const old = area.querySelector('.upload-progress-wrap');
+  if (old) old.remove();
+  const wrap = document.createElement('div');
+  wrap.className = 'upload-progress-wrap';
+  wrap.innerHTML = `<div class="upload-progress-track"><div class="upload-progress-fill" style="width:0%"></div></div><div class="upload-progress-label">Mengupload... 0%</div>`;
+  area.appendChild(wrap);
+  return wrap;
+}
+function updateUploadProgress(wrap, pct) {
+  if (!wrap) return;
+  const fill = wrap.querySelector('.upload-progress-fill');
+  const label = wrap.querySelector('.upload-progress-label');
+  if (fill) fill.style.width = pct + '%';
+  if (label) label.textContent = pct >= 100 ? 'Selesai ✓' : ('Mengupload... ' + pct + '%');
+}
+
+// Resize + re-encode images client-side so they take far less space in
+// localStorage (a raw phone photo can be 3-5MB; this brings it down to
+// roughly 100-300KB while staying perfectly readable on the page).
+function compressImage(file, maxDim = 1000, quality = 0.75) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Gagal membaca file gambar.'));
+    reader.onload = e => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('Gagal memproses gambar.'));
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) { height = Math.round(height * (maxDim / width)); width = maxDim; }
+          else { width = Math.round(width * (maxDim / height)); height = maxDim; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Rough estimate (in KB) of how much of localStorage our portfolio data
+// is currently using, so quota error messages can be specific.
+function getStorageUsageKB() {
+  try {
+    const raw = localStorage.getItem('portfolio_data') || '';
+    return Math.round((raw.length * 2) / 1024); // UTF-16 chars ≈ 2 bytes each
+  } catch (e) { return null; }
+}
+
+function explainStorageFailure(err) {
+  const usedKB = getStorageUsageKB();
+  const usedTxt = usedKB !== null ? `Data tersimpan saat ini: ~${usedKB.toLocaleString('id-ID')} KB.\n\n` : '';
+  const isQuota = err && (err.name === 'QuotaExceededError' || err.code === 22);
+  const isFileProtocol = location.protocol === 'file:';
+  let msg = 'Gagal menyimpan: penyimpanan browser penuh.\n\n' + usedTxt;
+  if (isFileProtocol) {
+    msg += 'Halaman ini dibuka langsung dari file (file://...). Beberapa browser memberi kuota localStorage yang jauh lebih kecil — kadang cuma beberapa ratus KB — untuk halaman yang dibuka seperti ini, walaupun file yang kamu upload kecil.\n\n' +
+           'Solusi paling ampuh: jalankan portofolio ini lewat local server (misalnya buka folder di VS Code lalu "Open with Live Server", atau jalankan "npx serve" di foldernya) lalu akses lewat http://localhost — di situ kuota penyimpanan jauh lebih besar (biasanya 5-10MB+).\n\n';
+  }
+  msg += 'Sementara itu, coba hapus beberapa foto/file lama yang sudah tidak perlu (terutama PDF atau foto resolusi besar) lalu simpan lagi.';
+  return msg;
+}
+
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { alert('Ukuran foto maksimal 2MB ya!'); return; }
+  const area = event.target.closest('.photo-upload-area');
+  const progressEl = showUploadProgress(area);
+  updateUploadProgress(progressEl, 25);
+  compressImage(file).then(dataUrl => {
+    updateUploadProgress(progressEl, 100);
+    DATA.profil.avatarPhoto = dataUrl;
+    refreshAvatarPreview();
+    renderPage();
+  }).catch(err => {
+    alert(err.message || 'Gagal memproses foto.');
+    if (progressEl) progressEl.remove();
+  });
+}
+
+function removeAvatar(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  DATA.profil.avatarPhoto = '';
+  refreshAvatarPreview();
+  renderPage();
+}
+
+// ========================
+// PROJECT PHOTO UPLOAD
+// ========================
+function handleProjectPhotoUpload(event, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { alert('Ukuran foto maksimal 2MB ya!'); return; }
+  const area = event.target.closest('.photo-upload-area');
+  const progressEl = showUploadProgress(area);
+  updateUploadProgress(progressEl, 25);
+  compressImage(file).then(dataUrl => {
+    updateUploadProgress(progressEl, 100);
+    DATA.projects[idx].photo = dataUrl;
+    renderProjectsEditor();
+    renderPage();
+  }).catch(err => {
+    alert(err.message || 'Gagal memproses foto.');
+    if (progressEl) progressEl.remove();
+  });
+}
+
+function removeProjectPhoto(idx) {
+  DATA.projects[idx].photo = '';
+  renderProjectsEditor();
+  renderPage();
+}
+
+// ========================
+// SKILLS EDITOR
+// ========================
+// ========================
+// GENERIC REORDER HELPER
+// ========================
+function moveArrItem(arrName, i, dir, renderEditorFn, renderPageFn) {
+  const arr = DATA[arrName];
+  const j = i + dir;
+  if (j < 0 || j >= arr.length) return;
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+  // Render tampilan website utama DULU dan dipisah try/catch dari render
+  // panel editor, supaya kalau panel editor error, tampilan website tetap
+  // ter-update.
+  if (renderPageFn) {
+    try { renderPageFn(); } catch (e) { console.error('renderPageFn error:', e); }
+  }
+  try { renderEditorFn(); } catch (e) { console.error('renderEditorFn error:', e); }
+}
+
+function renderSkillsEditor() {
+  const el = document.getElementById('skills-editor');
+  el.innerHTML = DATA.skills.map((s,i) => `
+    <div class="edit-card">
+      <div class="edit-card-header">
+        <span class="edit-card-title">${s.icon} ${s.title}</span>
+        <div class="edit-card-actions">
+          <button class="btn-move" onclick="moveArrItem('skills',${i},-1,renderSkillsEditor,renderSkillsPage)" title="Pindah ke atas" ${i===0?'disabled':''}>▲</button>
+          <button class="btn-move" onclick="moveArrItem('skills',${i},1,renderSkillsEditor,renderSkillsPage)" title="Pindah ke bawah" ${i===DATA.skills.length-1?'disabled':''}>▼</button>
+          <button class="btn-delete" onclick="deleteSkill(${i})" title="Hapus">🗑</button>
+        </div>
+      </div>
+      <div class="edit-field"><label>Ikon</label><input type="text" value="${s.icon}" onchange="DATA.skills[${i}].icon=this.value"></div>
+      <div class="edit-field"><label>Warna (blue/purple/green)</label><input type="text" value="${s.color}" onchange="DATA.skills[${i}].color=this.value"></div>
+      <div class="edit-field"><label>Judul</label><input type="text" value="${s.title}" onchange="DATA.skills[${i}].title=this.value"></div>
+      <div class="edit-field"><label>Skills (pisahkan koma)</label><textarea onchange="DATA.skills[${i}].pills=this.value">${s.pills}</textarea></div>
+    </div>`).join('');
+}
+function deleteSkill(i) { DATA.skills.splice(i,1); renderSkillsEditor(); }
+function addSkillCard() {
+  DATA.skills.push({icon:'⭐',color:'blue',title:'Skill Baru',pills:'Contoh, Tool'});
+  renderSkillsEditor();
+}
+
+// ========================
+// PROJECTS EDITOR
+// ========================
+function renderProjectsEditor() {
+  const el = document.getElementById('projects-editor');
+  el.innerHTML = DATA.projects.map((pr,i) => {
+    const previewHTML = pr.photo
+      ? `<img src="${pr.photo}" class="photo-preview-project" alt="Preview"><button class="btn-remove-photo" onclick="removeProjectPhoto(${i})">✕ Hapus foto</button>`
+      : `<div style="width:100%;height:50px;background:var(--surface-alt);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:6px">${pr.emoji}</div>`;
+    return `
+    <div class="edit-card">
+      <div class="edit-card-header">
+        <span class="edit-card-title">${pr.emoji} ${pr.title}</span>
+        <div class="edit-card-actions">
+          <button class="btn-move" onclick="moveArrItem('projects',${i},-1,renderProjectsEditor,renderProjectsPage)" title="Pindah ke atas" ${i===0?'disabled':''}>▲</button>
+          <button class="btn-move" onclick="moveArrItem('projects',${i},1,renderProjectsEditor,renderProjectsPage)" title="Pindah ke bawah" ${i===DATA.projects.length-1?'disabled':''}>▼</button>
+          <button class="btn-delete" onclick="deleteProject(${i})" title="Hapus">🗑</button>
+        </div>
+      </div>
+      <div class="edit-field">
+        <label>Foto Thumbnail Project</label>
+        <div class="photo-upload-area">
+          <input type="file" accept="image/*" onchange="handleProjectPhotoUpload(event, ${i})">
+          ${previewHTML}
+          <div class="photo-upload-hint">Klik untuk upload foto<br><strong>JPG, PNG</strong> — maks 2MB</div>
+        </div>
+      </div>
+      <div class="edit-field"><label>Emoji (tampil jika tidak ada foto)</label><input type="text" value="${pr.emoji}" onchange="DATA.projects[${i}].emoji=this.value"></div>
+      <div class="edit-field"><label>Warna BG (c1-c4, jika tidak ada foto)</label><input type="text" value="${pr.color}" onchange="DATA.projects[${i}].color=this.value"></div>
+      <div class="edit-field"><label>Badge</label><input type="text" value="${pr.badge}" onchange="DATA.projects[${i}].badge=this.value"></div>
+      <div class="edit-field"><label>Judul</label><input type="text" value="${pr.title}" onchange="DATA.projects[${i}].title=this.value"></div>
+      <div class="edit-field"><label>Deskripsi</label><textarea onchange="DATA.projects[${i}].desc=this.value">${pr.desc}</textarea></div>
+      <div class="edit-field"><label>Tech (pisahkan koma)</label><input type="text" value="${pr.pills}" onchange="DATA.projects[${i}].pills=this.value"></div>
+      <div class="edit-field"><label>Link</label><input type="text" value="${pr.link}" onchange="DATA.projects[${i}].link=this.value"></div>
+    </div>`;
+  }).join('');
+}
+function deleteProject(i) { DATA.projects.splice(i,1); renderProjectsEditor(); }
+function addProjectCard() {
+  DATA.projects.push({emoji:'🚀',color:'c1',badge:'Project',title:'Project Baru',desc:'Deskripsi project.',pills:'Tool1, Tool2',link:'#',photo:''});
+  renderProjectsEditor();
+}
+
+// ========================
+// EXPERIENCE EDITOR
+// ========================
+function renderExpEditor() {
+  const el = document.getElementById('experience-editor');
+  el.innerHTML = DATA.experience.map((e,i) => {
+    const previewHTML = e.file
+      ? (e.fileType === 'application/pdf'
+          ? `<div style="padding:6px 0;font-size:12px;color:var(--accent-text)">📄 PDF tersimpan</div><button class="btn-remove-photo" onclick="removeExpFile(${i})">✕ Hapus file</button>`
+          : `<img src="${e.file}" style="width:100%;height:60px;object-fit:cover;border-radius:var(--radius);margin-bottom:4px;border:1px solid var(--border)"><button class="btn-remove-photo" onclick="removeExpFile(${i})">✕ Hapus file</button>`)
+      : '';
+    return `
+    <div class="edit-card">
+      <div class="edit-card-header">
+        <span class="edit-card-title">${e.icon} ${e.title.substring(0,30)}...</span>
+        <div class="edit-card-actions">
+          <button class="btn-move" onclick="moveArrItem('experience',${i},-1,renderExpEditor,renderExpPage)" title="Pindah ke atas" ${i===0?'disabled':''}>▲</button>
+          <button class="btn-move" onclick="moveArrItem('experience',${i},1,renderExpEditor,renderExpPage)" title="Pindah ke bawah" ${i===DATA.experience.length-1?'disabled':''}>▼</button>
+          <button class="btn-delete" onclick="deleteExp(${i})" title="Hapus">🗑</button>
+        </div>
+      </div>
+      <div class="edit-field"><label>Ikon</label><input type="text" value="${e.icon}" onchange="DATA.experience[${i}].icon=this.value"></div>
+      <div class="edit-field"><label>Judul / Posisi</label><input type="text" value="${e.title}" onchange="DATA.experience[${i}].title=this.value"></div>
+      <div class="edit-field"><label>Meta (tahun, tipe)</label><input type="text" value="${e.meta}" onchange="DATA.experience[${i}].meta=this.value"></div>
+      <div class="edit-field"><label>Deskripsi</label><textarea onchange="DATA.experience[${i}].desc=this.value">${e.desc}</textarea></div>
+      <div class="edit-field">
+        <label>Upload File Pendukung (Sertifikat/Surat Keterangan — PNG, JPG, PDF)</label>
+        <div class="photo-upload-area">
+          <input type="file" accept="image/*,application/pdf" onchange="handleExpFileUpload(event, ${i})">
+          ${previewHTML}
+          <div class="photo-upload-hint">Klik untuk upload<br><strong>PNG, JPG, PDF</strong> — maks 5MB</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function deleteExp(i) { DATA.experience.splice(i,1); renderExpEditor(); }
+function addExpItem() {
+  DATA.experience.push({icon:'⭐',title:'Posisi Baru',meta:'20XX · Tipe',desc:'Deskripsi.',file:'',fileType:''});
+  renderExpEditor();
+}
+
+// ========================
+// EXPERIENCE FILE UPLOAD
+// ========================
+function handleExpFileUpload(event, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { alert('Ukuran file maksimal 5MB ya!'); return; }
+  const area = event.target.closest('.photo-upload-area');
+  const progressEl = showUploadProgress(area);
+  const isPdf = file.type === 'application/pdf';
+  if (isPdf) {
+    const reader = new FileReader();
+    reader.onprogress = e => { if (e.lengthComputable) updateUploadProgress(progressEl, Math.round((e.loaded/e.total)*100)); };
+    reader.onload = e => {
+      updateUploadProgress(progressEl, 100);
+      DATA.experience[idx].file = e.target.result;
+      DATA.experience[idx].fileType = file.type;
+      renderExpEditor();
+      renderPage();
+    };
+    reader.onerror = () => { alert('Gagal membaca file.'); if (progressEl) progressEl.remove(); };
+    reader.readAsDataURL(file);
+  } else {
+    updateUploadProgress(progressEl, 25);
+    compressImage(file).then(dataUrl => {
+      updateUploadProgress(progressEl, 100);
+      DATA.experience[idx].file = dataUrl;
+      DATA.experience[idx].fileType = 'image/jpeg';
+      renderExpEditor();
+      renderPage();
+    }).catch(err => {
+      alert(err.message || 'Gagal memproses file.');
+      if (progressEl) progressEl.remove();
+    });
+  }
+}
+function removeExpFile(idx) {
+  DATA.experience[idx].file = '';
+  DATA.experience[idx].fileType = '';
+  renderExpEditor();
+  renderPage();
+}
+
+// ========================
+// CERTS EDITOR
+// ========================
+function renderCertsEditor() {
+  const el = document.getElementById('certs-editor');
+  el.innerHTML = DATA.certs.map((c,i) => {
+    const previewHTML = c.file
+      ? (c.fileType === 'application/pdf'
+          ? `<div style="padding:6px 0;font-size:12px;color:var(--accent-text)">📄 PDF tersimpan</div><button class="btn-remove-photo" onclick="removeCertFile(${i})">✕ Hapus file</button>`
+          : `<img src="${c.file}" style="width:100%;height:60px;object-fit:cover;border-radius:var(--radius);margin-bottom:4px;border:1px solid var(--border)"><button class="btn-remove-photo" onclick="removeCertFile(${i})">✕ Hapus file</button>`)
+      : '';
+    return `
+    <div class="edit-card">
+      <div class="edit-card-header">
+        <span class="edit-card-title">${c.emoji} ${c.name}</span>
+        <div class="edit-card-actions">
+          <button class="btn-move" onclick="moveArrItem('certs',${i},-1,renderCertsEditor,renderCertsPage)" title="Pindah ke atas" ${i===0?'disabled':''}>▲</button>
+          <button class="btn-move" onclick="moveArrItem('certs',${i},1,renderCertsEditor,renderCertsPage)" title="Pindah ke bawah" ${i===DATA.certs.length-1?'disabled':''}>▼</button>
+          <button class="btn-delete" onclick="deleteCert(${i})" title="Hapus">🗑</button>
+        </div>
+      </div>
+      <div class="edit-field"><label>Emoji</label><input type="text" value="${c.emoji}" onchange="DATA.certs[${i}].emoji=this.value"></div>
+      <div class="edit-field"><label>Nama Sertifikat</label><input type="text" value="${c.name}" onchange="DATA.certs[${i}].name=this.value"></div>
+      <div class="edit-field"><label>Lembaga & Tahun</label><input type="text" value="${c.org}" onchange="DATA.certs[${i}].org=this.value"></div>
+      <div class="edit-field">
+        <label>Upload File Sertifikat (PNG, JPG, PDF)</label>
+        <div class="photo-upload-area">
+          <input type="file" accept="image/*,application/pdf" onchange="handleCertFileUpload(event, ${i})">
+          ${previewHTML}
+          <div class="photo-upload-hint">Klik untuk upload<br><strong>PNG, JPG, PDF</strong> — maks 5MB</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function deleteCert(i) { DATA.certs.splice(i,1); renderCertsEditor(); }
+function addCertCard() {
+  DATA.certs.push({emoji:'🏅',name:'Nama Sertifikat',org:'Lembaga · 202X', file:'', fileType:''});
+  renderCertsEditor();
+}
+
+// ========================
+// CERT FILE UPLOAD
+// ========================
+function handleCertFileUpload(event, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { alert('Ukuran file maksimal 5MB ya!'); return; }
+  const area = event.target.closest('.photo-upload-area');
+  const progressEl = showUploadProgress(area);
+  const isPdf = file.type === 'application/pdf';
+  if (isPdf) {
+    const reader = new FileReader();
+    reader.onprogress = e => { if (e.lengthComputable) updateUploadProgress(progressEl, Math.round((e.loaded/e.total)*100)); };
+    reader.onload = e => {
+      updateUploadProgress(progressEl, 100);
+      DATA.certs[idx].file = e.target.result;
+      DATA.certs[idx].fileType = file.type;
+      renderCertsEditor();
+      renderCertsPage();
+    };
+    reader.onerror = () => { alert('Gagal membaca file.'); if (progressEl) progressEl.remove(); };
+    reader.readAsDataURL(file);
+  } else {
+    updateUploadProgress(progressEl, 25);
+    compressImage(file).then(dataUrl => {
+      updateUploadProgress(progressEl, 100);
+      DATA.certs[idx].file = dataUrl;
+      DATA.certs[idx].fileType = 'image/jpeg';
+      renderCertsEditor();
+      renderCertsPage();
+    }).catch(err => {
+      alert(err.message || 'Gagal memproses file.');
+      if (progressEl) progressEl.remove();
+    });
+  }
+}
+function removeCertFile(idx) {
+  DATA.certs[idx].file = '';
+  DATA.certs[idx].fileType = '';
+  renderCertsEditor();
+  renderCertsPage();
+}
+
+// ========================
+// SAVE ALL
+// ========================
+function exportDataJSON() {
+  const json = JSON.stringify(DATA, null, 2);
+  // Coba salin otomatis ke clipboard
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(json).then(() => {
+      alert('Data berhasil disalin ke clipboard!\n\nSekarang paste (Ctrl+V) ke chat Claude untuk dibakukan ke dalam file.');
+    }).catch(() => {
+      promptShowJSON(json);
+    });
+  } else {
+    promptShowJSON(json);
+  }
+}
+function promptShowJSON(json) {
+  // Fallback: tampilkan di textarea agar bisa di-copy manual
+  const w = window.open('', '_blank');
+  w.document.write('<textarea style="width:100%;height:100%;font-family:monospace;font-size:12px;">' + json.replace(/</g,'&lt;') + '</textarea>');
+}
+
+function saveAll() {
+  try {
+    // Read profil form
+    DATA.profil.name = document.getElementById('f-name').value;
+    DATA.profil.badge = document.getElementById('f-badge').value;
+    DATA.profil.desc = document.getElementById('f-desc').value;
+    DATA.profil.tags = document.getElementById('f-tags').value;
+    DATA.profil.cv = document.getElementById('f-cv').value;
+    DATA.profil.github = document.getElementById('f-github').value;
+    DATA.profil.linkedin = document.getElementById('f-linkedin').value;
+    DATA.profil.email = document.getElementById('f-email').value;
+    DATA.profil.footer = document.getElementById('f-footer').value;
+    DATA.profil.stats = [1,2,3,4].map(i => ({
+      num: document.getElementById(`s${i}-num`).value,
+      lbl: document.getElementById(`s${i}-lbl`).value
+    }));
+
+    const result = saveData(DATA);
+    if (!result.ok) {
+      const isQuota = result.error && (result.error.name === 'QuotaExceededError' || result.error.code === 22);
+      if (isQuota) {
+        alert(explainStorageFailure(result.error));
+      } else {
+        alert('Gagal menyimpan perubahan: ' + (result.error ? result.error.message : 'penyebab tidak diketahui') + '\n\nCoba lagi atau hapus beberapa file besar.');
+      }
+      return;
+    }
+
+    renderPage();
+    // Toast
+    const t = document.getElementById('saveToast');
+    t.textContent = '✓ Tersimpan!';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  } catch (err) {
+    console.error('saveAll error:', err);
+    alert('Terjadi kesalahan saat menyimpan: ' + err.message);
+  }
+}
+
+function resetAll() {
+  if (!confirm('Yakin ingin menghapus semua perubahan dan kembali ke data awal?')) return;
+  localStorage.removeItem('portfolio_data');
+  DATA = JSON.parse(JSON.stringify(DEFAULT));
+  populateForm();
+  renderPage();
+  const t = document.getElementById('saveToast');
+  t.textContent = '↺ Data direset';
+  t.classList.add('show');
+  setTimeout(() => { t.classList.remove('show'); t.textContent = '✓ Tersimpan!'; }, 2500);
+}
+
+// ========================
+// INIT
+// ========================
+renderPage();
+</script>
+
+</body>
+</html>
