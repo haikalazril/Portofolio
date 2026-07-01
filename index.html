@@ -142,6 +142,10 @@
     .exp-meta { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--accent); margin-bottom: 10px; }
     .exp-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; max-width: 680px; }
 
+    .certs-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.75rem; }
+    .certs-filter-btn { font-family: inherit; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 9px 18px; background: var(--surface); border: 3px solid var(--border); color: var(--ink); cursor: pointer; box-shadow: 4px 4px 0 var(--border); transition: all 0.12s; }
+    .certs-filter-btn:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--border); }
+    .certs-filter-btn.active { background: var(--accent); color: #fff; }
     .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .cert-card { background: var(--surface); padding: 1.4rem 1.5rem; display: flex; align-items: flex-start; gap: 14px; border: 3px solid var(--border); transition: background 0.15s, transform 0.12s; box-shadow: 5px 5px 0 var(--border); }
     .cert-card:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--border); }
@@ -149,6 +153,7 @@
     .cert-emoji { font-size: 24px; flex-shrink: 0; margin-top: 1px; }
     .cert-name { font-size: 13.5px; font-weight: 700; line-height: 1.4; }
     .cert-org { font-size: 11.5px; color: var(--text-muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+    .certs-empty { grid-column: 1 / -1; text-align: center; padding: 2.5rem 1rem; color: var(--text-muted); font-size: 14px; font-weight: 600; }
     #contact { text-align: center; }
     #contact .section-label { justify-content: center; }
     #contact .section-label::after { display: none; }
@@ -266,7 +271,7 @@
 
     .edit-field { margin-bottom: 1rem; }
     .edit-field label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 5px; }
-    .edit-field input, .edit-field textarea {
+    .edit-field input, .edit-field textarea, .edit-field select {
       width: 100%;
       padding: 8px 10px;
       font-size: 13px;
@@ -278,7 +283,7 @@
       transition: border-color 0.15s;
       resize: vertical;
     }
-    .edit-field input:focus, .edit-field textarea:focus { outline: none; border-color: var(--accent); }
+    .edit-field input:focus, .edit-field textarea:focus, .edit-field select:focus { outline: none; border-color: var(--accent); }
     .edit-field textarea { min-height: 70px; }
 
     .edit-card {
@@ -640,6 +645,31 @@
   </div>
 </div>
 
+<!-- CROP MODAL (untuk foto thumbnail project) -->
+<div class="cert-modal-overlay" id="cropModalOverlay" style="z-index:10050;">
+  <div class="cert-modal" style="max-width:560px;">
+    <div class="cert-modal-header">
+      <h3>🖼️ Atur Crop Foto Thumbnail</h3>
+      <button class="cert-modal-close" onclick="cancelCrop()">×</button>
+    </div>
+    <div class="cert-modal-body" style="padding:1.25rem;">
+      <div id="cropViewport" style="position:relative;width:100%;aspect-ratio:3.5/1;overflow:hidden;background:#111;border-radius:var(--radius);cursor:grab;touch-action:none;">
+        <img id="cropImg" src="" style="position:absolute;top:0;left:0;transform-origin:0 0;user-select:none;-webkit-user-drag:none;pointer-events:none;">
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:14px;">
+        <span style="font-size:12px;color:var(--text-muted);">🔍−</span>
+        <input id="cropZoom" type="range" min="0" max="100" value="0" style="flex:1;" oninput="onCropZoomChange(this.value)">
+        <span style="font-size:12px;color:var(--text-muted);">🔍+</span>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">Geser foto untuk memilih posisi, atau gunakan slider untuk zoom. Area gelap di luar kotak tidak akan ikut tersimpan.</p>
+    </div>
+    <div class="cert-modal-footer" style="gap:10px;">
+      <button class="btn-save" style="background:var(--surface-alt);color:var(--ink);" onclick="cancelCrop()">Batal</button>
+      <button class="btn-save" onclick="confirmCrop()">✓ Simpan Crop</button>
+    </div>
+  </div>
+</div>
+
 <!-- EDIT PANEL -->
 <div class="edit-panel" id="editPanel">
   <div class="edit-panel-header">
@@ -838,7 +868,8 @@
 
 <section id="certifications">
   <div class="container">
-    <div class="section-label">Certifications</div>
+    <div class="section-label">Certificates</div>
+    <div class="certs-filter" id="certs-filter"></div>
     <div class="certs-grid" id="certs-grid">
       <!-- rendered by JS -->
     </div>
@@ -904,9 +935,9 @@ const DEFAULT = {
     { icon:'🎓', title:'S1 Sistem Informasi — [Nama Universitas]', meta:'20XX – 20XX', desc:'Fokus pada manajemen basis data, pengembangan sistem informasi, dan analisis bisnis berbasis data.', file:'', fileType:'' }
   ],
   certs: [
-    { emoji:'📈', name:'Data Analyst Bootcamp', org:'[Nama Lembaga] · 2023' },
-    { emoji:'📣', name:'Digital Marketing', org:'[Nama Lembaga] · 2023' },
-    { emoji:'🏅', name:'[Nama Sertifikat]', org:'[Lembaga] · 202X' }
+    { emoji:'📈', name:'Data Analyst Bootcamp', org:'[Institution Name] · 2023', category:'competency' },
+    { emoji:'📣', name:'Digital Marketing Seminar', org:'[Institution Name] · 2023', category:'seminar' },
+    { emoji:'🏅', name:'[Certificate Name]', org:'[Institution] · 202X', category:'other' }
   ]
 };
 
@@ -970,6 +1001,30 @@ async function initDataFromCloud() {
 // ========================
 const PAGE = { skills: 1, projects: 1, exp: 1, certs: 1 };
 const PER_PAGE = { skills: 6, projects: 4, exp: 6, certs: 6 };
+
+const CERT_CATEGORIES = [
+  { key: 'all', label: 'All' },
+  { key: 'competency', label: 'Competency Certificate' },
+  { key: 'event', label: 'Event' },
+  { key: 'seminar', label: 'Seminar/Webinar' },
+  { key: 'other', label: 'Other' }
+];
+let certFilter = 'all';
+
+function renderCertsFilter() {
+  const el = document.getElementById('certs-filter');
+  if (!el) return;
+  el.innerHTML = CERT_CATEGORIES.map(c => `
+    <button class="certs-filter-btn ${certFilter === c.key ? 'active' : ''}" onclick="setCertFilter('${c.key}')">${c.label}</button>
+  `).join('');
+}
+
+function setCertFilter(key) {
+  certFilter = key;
+  PAGE.certs = 1;
+  renderCertsFilter();
+  renderCertsPage();
+}
 
 function makePagination(containerId, total, perPage, currentPage, onChangeFn) {
   const el = document.getElementById(containerId);
@@ -1052,24 +1107,30 @@ function renderExpPage() {
 }
 
 function renderCertsPage() {
-  const all = DATA.certs;
+  const filtered = certFilter === 'all'
+    ? DATA.certs.map((c, idx) => ({ c, idx }))
+    : DATA.certs.map((c, idx) => ({ c, idx })).filter(item => (item.c.category || 'other') === certFilter);
   const pp = PER_PAGE.certs;
   const start = (PAGE.certs-1)*pp;
-  const slice = all.slice(start, start+pp);
-  document.getElementById('certs-grid').innerHTML = slice.map((c, i) => {
-    const realIdx = start + i;
-    const hasFile = !!(c.file);
-    return `
-    <div class="cert-card ${hasFile ? 'cert-has-file' : ''}" onclick="openCertModal(${realIdx})">
-      ${hasFile ? '<span class="cert-upload-badge">📎 File</span>' : ''}
-      <span class="cert-emoji">${c.emoji}</span>
-      <div>
-        <div class="cert-name">${c.name}</div>
-        <div class="cert-org">${c.org}</div>
-      </div>
-    </div>`;
-  }).join('');
-  makePagination('certs-pagination', all.length, pp, PAGE.certs, 'goCertsPage');
+  const slice = filtered.slice(start, start+pp);
+  const grid = document.getElementById('certs-grid');
+  if (!slice.length) {
+    grid.innerHTML = `<div class="certs-empty">No certificates in this category yet.</div>`;
+  } else {
+    grid.innerHTML = slice.map(({ c, idx: realIdx }) => {
+      const hasFile = !!(c.file);
+      return `
+      <div class="cert-card ${hasFile ? 'cert-has-file' : ''}" onclick="openCertModal(${realIdx})">
+        ${hasFile ? '<span class="cert-upload-badge">📎 File</span>' : ''}
+        <span class="cert-emoji">${c.emoji}</span>
+        <div>
+          <div class="cert-name">${c.name}</div>
+          <div class="cert-org">${c.org}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  makePagination('certs-pagination', filtered.length, pp, PAGE.certs, 'goCertsPage');
 }
 
 // ========================
@@ -1175,6 +1236,7 @@ function renderPage() {
   renderExpPage();
 
   // Certs
+  renderCertsFilter();
   renderCertsPage();
 
   // Contact
@@ -1412,28 +1474,135 @@ function removeAvatar(event) {
 }
 
 // ========================
-// PROJECT PHOTO UPLOAD
+// PROJECT PHOTO UPLOAD (dengan crop manual)
 // ========================
 function handleProjectPhotoUpload(event, idx) {
   const file = event.target.files[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { alert('Ukuran foto maksimal 2MB ya!'); return; }
-  const area = event.target.closest('.photo-upload-area');
-  const progressEl = showUploadProgress(area);
-  updateUploadProgress(progressEl, 25);
-  compressImage(file).then(dataUrl => {
-    updateUploadProgress(progressEl, 100);
-    DATA.projects[idx].photo = dataUrl;
-    renderProjectsEditor();
-    renderPage();
-  }).catch(err => {
-    alert(err.message || 'Gagal memproses foto.');
-    if (progressEl) progressEl.remove();
-  });
+  if (file.size > 2 * 1024 * 1024) { alert('Ukuran foto maksimal 2MB ya!'); event.target.value = ''; return; }
+  const reader = new FileReader();
+  reader.onload = e => openCropModal(e.target.result, idx);
+  reader.onerror = () => alert('Gagal membaca file gambar.');
+  reader.readAsDataURL(file);
+  event.target.value = ''; // reset supaya bisa pilih file sama lagi nanti
 }
 
 function removeProjectPhoto(idx) {
   DATA.projects[idx].photo = '';
+  renderProjectsEditor();
+  renderPage();
+}
+
+// ========================
+// CROP MODAL (geser + zoom, output rasio 3.5:1 sesuai thumbnail project)
+// ========================
+const cropState = { idx: null, img: null, scale: 1, minScale: 1, x: 0, y: 0, dragging: false, startX: 0, startY: 0, startImgX: 0, startImgY: 0 };
+
+function openCropModal(dataUrl, idx) {
+  cropState.idx = idx;
+  const img = new Image();
+  img.onload = () => {
+    cropState.img = img;
+    const overlay = document.getElementById('cropModalOverlay');
+    overlay.classList.add('open');
+    const vp = document.getElementById('cropViewport');
+    const vpW = vp.clientWidth, vpH = vp.clientHeight;
+    const minScale = Math.max(vpW / img.naturalWidth, vpH / img.naturalHeight);
+    cropState.minScale = minScale;
+    cropState.scale = minScale;
+    cropState.x = (vpW - img.naturalWidth * minScale) / 2;
+    cropState.y = (vpH - img.naturalHeight * minScale) / 2;
+    const imgEl = document.getElementById('cropImg');
+    imgEl.src = dataUrl;
+    document.getElementById('cropZoom').value = 0;
+    applyCropTransform();
+    setupCropDragHandlers();
+  };
+  img.onerror = () => alert('Gagal memproses gambar.');
+  img.src = dataUrl;
+}
+
+function clampCropPosition() {
+  const vp = document.getElementById('cropViewport');
+  const vpW = vp.clientWidth, vpH = vp.clientHeight;
+  const dispW = cropState.img.naturalWidth * cropState.scale;
+  const dispH = cropState.img.naturalHeight * cropState.scale;
+  cropState.x = Math.min(0, Math.max(vpW - dispW, cropState.x));
+  cropState.y = Math.min(0, Math.max(vpH - dispH, cropState.y));
+}
+
+function applyCropTransform() {
+  clampCropPosition();
+  const imgEl = document.getElementById('cropImg');
+  imgEl.style.width = (cropState.img.naturalWidth * cropState.scale) + 'px';
+  imgEl.style.height = (cropState.img.naturalHeight * cropState.scale) + 'px';
+  imgEl.style.transform = `translate(${cropState.x}px, ${cropState.y}px)`;
+}
+
+function onCropZoomChange(val) {
+  const vp = document.getElementById('cropViewport');
+  const vpW = vp.clientWidth, vpH = vp.clientHeight;
+  // val 0-100 maps minScale -> minScale*3, sambil titik tengah viewport tetap fokus
+  const newScale = cropState.minScale * (1 + (val / 100) * 2);
+  const cx = vpW / 2, cy = vpH / 2;
+  const ratio = newScale / cropState.scale;
+  cropState.x = cx - (cx - cropState.x) * ratio;
+  cropState.y = cy - (cy - cropState.y) * ratio;
+  cropState.scale = newScale;
+  applyCropTransform();
+}
+
+let cropHandlersBound = false;
+function setupCropDragHandlers() {
+  if (cropHandlersBound) return;
+  cropHandlersBound = true;
+  const vp = document.getElementById('cropViewport');
+
+  const start = (clientX, clientY) => {
+    cropState.dragging = true;
+    cropState.startX = clientX; cropState.startY = clientY;
+    cropState.startImgX = cropState.x; cropState.startImgY = cropState.y;
+    vp.style.cursor = 'grabbing';
+  };
+  const move = (clientX, clientY) => {
+    if (!cropState.dragging) return;
+    cropState.x = cropState.startImgX + (clientX - cropState.startX);
+    cropState.y = cropState.startImgY + (clientY - cropState.startY);
+    applyCropTransform();
+  };
+  const end = () => { cropState.dragging = false; vp.style.cursor = 'grab'; };
+
+  vp.addEventListener('mousedown', e => { e.preventDefault(); start(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', e => move(e.clientX, e.clientY));
+  window.addEventListener('mouseup', end);
+
+  vp.addEventListener('touchstart', e => { const t = e.touches[0]; start(t.clientX, t.clientY); }, { passive: true });
+  window.addEventListener('touchmove', e => { if (!cropState.dragging) return; const t = e.touches[0]; move(t.clientX, t.clientY); }, { passive: true });
+  window.addEventListener('touchend', end);
+}
+
+function cancelCrop() {
+  document.getElementById('cropModalOverlay').classList.remove('open');
+  cropState.idx = null; cropState.img = null;
+}
+
+function confirmCrop() {
+  const vp = document.getElementById('cropViewport');
+  const vpW = vp.clientWidth, vpH = vp.clientHeight;
+  const srcX = -cropState.x / cropState.scale;
+  const srcY = -cropState.y / cropState.scale;
+  const srcW = vpW / cropState.scale;
+  const srcH = vpH / cropState.scale;
+
+  const outW = 1000, outH = Math.round(1000 / (vpW / vpH));
+  const canvas = document.createElement('canvas');
+  canvas.width = outW; canvas.height = outH;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(cropState.img, srcX, srcY, srcW, srcH, 0, 0, outW, outH);
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+  DATA.projects[cropState.idx].photo = dataUrl;
+  document.getElementById('cropModalOverlay').classList.remove('open');
   renderProjectsEditor();
   renderPage();
 }
@@ -1635,6 +1804,12 @@ function renderCertsEditor() {
       <div class="edit-field"><label>Nama Sertifikat</label><input type="text" value="${c.name}" onchange="DATA.certs[${i}].name=this.value"></div>
       <div class="edit-field"><label>Lembaga & Tahun</label><input type="text" value="${c.org}" onchange="DATA.certs[${i}].org=this.value"></div>
       <div class="edit-field">
+        <label>Kategori</label>
+        <select onchange="DATA.certs[${i}].category=this.value; renderCertsEditor(); renderCertsFilter(); renderCertsPage();">
+          ${CERT_CATEGORIES.filter(cat => cat.key !== 'all').map(cat => `<option value="${cat.key}" ${((c.category||'other')===cat.key)?'selected':''}>${cat.label}</option>`).join('')}
+        </select>
+      </div>
+      <div class="edit-field">
         <label>Upload File Sertifikat (PNG, JPG, PDF)</label>
         <div class="photo-upload-area">
           <input type="file" accept="image/*,application/pdf" onchange="handleCertFileUpload(event, ${i})">
@@ -1645,10 +1820,12 @@ function renderCertsEditor() {
     </div>`;
   }).join('');
 }
-function deleteCert(i) { DATA.certs.splice(i,1); renderCertsEditor(); }
+function deleteCert(i) { DATA.certs.splice(i,1); renderCertsEditor(); renderCertsPage(); }
 function addCertCard() {
-  DATA.certs.push({emoji:'🏅',name:'Nama Sertifikat',org:'Lembaga · 202X', file:'', fileType:''});
+  DATA.certs.push({emoji:'🏅',name:'Nama Sertifikat',org:'Lembaga · 202X', category:'other', file:'', fileType:''});
   renderCertsEditor();
+  renderCertsFilter();
+  renderCertsPage();
 }
 
 // ========================
