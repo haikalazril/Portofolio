@@ -969,7 +969,15 @@ async function saveData(data) {
     if (!fbAuth.currentUser) {
       return { ok: false, error: { message: 'Kamu harus login dulu untuk menyimpan perubahan.' } };
     }
-    await fbDB.ref('portfolioData').set(data);
+    // Backup data lama dulu sebelum ditimpa, jaga-jaga kalau perlu rollback
+    try {
+      const oldSnap = await fbDB.ref('portfolioData').once('value');
+      if (oldSnap.exists()) {
+        await fbDB.ref('portfolioData_backup/' + Date.now()).set(oldSnap.val());
+      }
+    } catch(e) { console.error('Gagal membuat backup sebelum simpan:', e); }
+    // update() hanya menimpa key yang dikirim, bukan .set() yang menghapus seluruh node
+    await fbDB.ref('portfolioData').update(data);
     // simpan cache lokal juga, supaya tetap ada walau koneksi internet putus
     try { localStorage.setItem('portfolio_data', JSON.stringify(data)); } catch(e) {}
     return { ok: true };
@@ -981,6 +989,7 @@ async function saveData(data) {
 // Tampilkan dulu data cache/lokal/default secepatnya (biar halaman tidak kosong),
 // lalu disusul data terbaru dari cloud begitu selesai dimuat.
 let DATA = loadLocalFallback();
+let isCloudDataReady = false;
 
 async function initDataFromCloud() {
   try {
@@ -988,6 +997,8 @@ async function initDataFromCloud() {
     DATA = snap.exists() ? snap.val() : JSON.parse(JSON.stringify(DEFAULT));
   } catch (e) {
     console.error('Gagal memuat data dari cloud, menampilkan data lokal/default:', e);
+  } finally {
+    isCloudDataReady = true;
   }
   renderPage();
 }
@@ -1264,6 +1275,10 @@ function handleLogoClick() {
 
 let editModeActive = false;
 function enterEditMode() {
+  if (!isCloudDataReady) {
+    alert('Data dari cloud masih dimuat, tunggu sebentar lalu coba lagi.');
+    return;
+  }
   editModeActive = true;
   document.body.classList.add('edit-mode');
   document.getElementById('editIndicator').classList.add('visible');
